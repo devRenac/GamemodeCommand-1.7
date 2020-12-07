@@ -9,7 +9,13 @@ import org.bukkit.entity.Player;
 
 import dev.rena.core.base.Main;
 import dev.rena.core.utils.CC;
+/*
+This class is only if, I will create another in switch
 
+07-12-2020
+
+
+*/
 public class Gamemode implements CommandExecutor{
 	final Main plugin;
 	public Gamemode (Main plugin) {
