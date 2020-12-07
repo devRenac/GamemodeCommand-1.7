@@ -9,12 +9,7 @@ import org.bukkit.entity.Player;
 
 import dev.rena.core.base.Main;
 import dev.rena.core.utils.CC;
-/*
-This class is only if, I will create another in switch
-07-12-2020
 
-
-*/
 public class Gamemode implements CommandExecutor{
 	final Main plugin;
 	public Gamemode (Main plugin) {
@@ -31,31 +26,8 @@ public class Gamemode implements CommandExecutor{
 			player.sendMessage(CC.translate("&cUsage: /gamemode <0|1|2|3> <target opcional>"));
 			return true;
 		}
-		Player target = Bukkit.getPlayer(args[1]);
-		if(args.length == 2) {
-			if(target == null) {
-				player.sendMessage(CC.translate(plugin.getConfig().getString("PLAYER_NOT_FOUND")));
-				return true;
-			}else if(player == target) {
-				player.sendMessage(CC.translate(plugin.getConfig().getString("COMMAND_NOT_YOURSELF")));
-				return true;
-			}else {
-			if(args[0].equalsIgnoreCase("SUVIVAL") || args[0].equalsIgnoreCase("0")) {
-				target.setGameMode(GameMode.SURVIVAL);
-		}else if(args[0].equalsIgnoreCase("CREATIVE") || args[0].equalsIgnoreCase("1")) {
-				target.setGameMode(GameMode.CREATIVE);
-			}else if(args[0].equalsIgnoreCase("ADVENTURE") || args[0].equalsIgnoreCase("2")) {
-				target.setGameMode(GameMode.ADVENTURE);
-		}else {
-			player.sendMessage(CC.translate("&cArgument '"+args[0]+ "' not found"));
-			return true;
-		}
-			player.sendMessage(CC.translate(plugin.getConfig().getString("GAMEMODE_OTHER")));
-			target.sendMessage(CC.translate(plugin.getConfig().getString("GAMEMODE_PLAYER")));
-			return true;
-			}
-}
-			if(args[0].equalsIgnoreCase("SUVIVAL") || args[0].equalsIgnoreCase("0")) {
+		if(args.length == 1) {
+			if(args[0].equalsIgnoreCase("SURVIVAL") || args[0].equalsIgnoreCase("0")) {
 				player.setGameMode(GameMode.SURVIVAL);
 		}else if(args[0].equalsIgnoreCase("CREATIVE") || args[0].equalsIgnoreCase("1")) {
 				player.setGameMode(GameMode.CREATIVE);
@@ -65,9 +37,32 @@ public class Gamemode implements CommandExecutor{
 			player.sendMessage(CC.translate("&cArgument "+args[0]+ " not found"));
 			return true;
 		}
-		player.sendMessage(CC.translate(plugin.getConfig().getString("GAMEMODE"))
+		player.sendMessage(CC.translate(plugin.getConfig().getString("ESSENTIALS_MESSAGE.GAMEMODE"))
 				.replace("{player_gamemode}", player.getGameMode().toString()));
 		return true;
+		}
+		Player target = Bukkit.getPlayer(args[1]);
+		if(target == null) {
+			player.sendMessage(CC.translate(plugin.getConfig().getString("PLAYER_NOT_FOUND")));
+			return true;
+		}
+		if(player == target) {
+			player.sendMessage(CC.translate(CC.translate(plugin.getConfig().getString("COMMAND_NOT_YOURSELF"))));
+			return true;
+		}
+		if(args[0].equalsIgnoreCase("SURVIVAL") || args[0].equalsIgnoreCase("0")) {
+			target.setGameMode(GameMode.SURVIVAL);
+	}else if(args[0].equalsIgnoreCase("CREATIVE") || args[0].equalsIgnoreCase("1")) {
+			target.setGameMode(GameMode.CREATIVE);
+		}else if(args[0].equalsIgnoreCase("ADVENTURE") || args[0].equalsIgnoreCase("2")) {
+			target.setGameMode(GameMode.ADVENTURE);
+	}else {
+		player.sendMessage(CC.translate("&cArgument '"+args[0]+ "' not found"));
+		return true;
 	}
-
+		player.sendMessage(CC.translate(plugin.getConfig().getString("ESSENTIALS_MESSAGE.GAMEMODE_OTHER"))
+			.replace("{gamemode_other}", target.getGameMode().toString())
+			.replace("{player}", target.getName()));
+		return true;
+	}
 }
