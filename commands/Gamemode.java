@@ -22,7 +22,7 @@ public class Gamemode implements CommandExecutor{
 			return true;
 		}
 		Player player = (Player) sender;
-		if(args.length < 0 || args.length >= 3) {
+		if(args.length < 0 || args.length >= 3 || args.length == 0) {
 			player.sendMessage(CC.translate("&cUsage: /gamemode <0|1|2|3> <target opcional>"));
 			return true;
 		}
